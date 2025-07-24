@@ -20,7 +20,7 @@ public class ChartController {
         this.chartService = chartService;
     }
 
-    @GetMapping("/{market}/trades")
+    @GetMapping("/{market}")
     public List<Trade> getTradesForMarket(@PathVariable String market) {
         return chartService.getRecentTrades(market);
     }

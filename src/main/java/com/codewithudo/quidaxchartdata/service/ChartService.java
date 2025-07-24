@@ -20,9 +20,10 @@ public class ChartService {
     }
 
     public List<Trade> getRecentTrades(String market) {
-        String url = QUIDAX_API_BASE_URL + market + "/trades";
+        String url = "https://app.quidax.com/api/v1/trades/" + market;
 
-        // We use ParameterizedTypeReference because the API returns a list of trades (List<Trade>).
+        // We assume the response is a direct list of trades.
+        // If this fails, it means the response is wrapped, just like the others.
         ResponseEntity<List<Trade>> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
