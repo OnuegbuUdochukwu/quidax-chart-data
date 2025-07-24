@@ -1,6 +1,7 @@
 package com.codewithudo.quidaxchartdata.service;
 
 import com.codewithudo.quidaxchartdata.dto.Trade;
+import com.codewithudo.quidaxchartdata.dto.TradesResponse;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -22,15 +23,15 @@ public class ChartService {
     public List<Trade> getRecentTrades(String market) {
         String url = "https://app.quidax.com/api/v1/trades/" + market;
 
-        // We assume the response is a direct list of trades.
-        // If this fails, it means the response is wrapped, just like the others.
-        ResponseEntity<List<Trade>> response = restTemplate.exchange(
-                url,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<>() {}
-        );
+        // 1. Tell RestTemplate to expect our new TradesResponse object
+        TradesResponse response = restTemplate.getForObject(url, TradesResponse.class);
 
-        return response.getBody();
+        // 2. Unwrap the list of trades from inside the response object
+        if (response != null && "success".equals(response.getStatus())) {
+            return response.getData();
+        }
+
+        // Return an empty list if the call fails or data is null
+        return java.util.Collections.emptyList();
     }
 }
