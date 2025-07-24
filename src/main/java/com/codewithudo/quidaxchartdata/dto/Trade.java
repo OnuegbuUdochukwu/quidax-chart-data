@@ -6,10 +6,16 @@ import lombok.Data;
 @Data
 public class Trade {
 
-    private String id;
+    private String type;
     private String price;
-    private String volume;
+    private long timestamp;
 
-    @JsonProperty("created_at")
-    private String createdAt;
+    @JsonProperty("trade_id")
+    private int tradeId;
+
+    @JsonProperty("base_volume")
+    private String baseVolume;
+
+    @JsonProperty("quote_volume")
+    private String quoteVolume;
 }
