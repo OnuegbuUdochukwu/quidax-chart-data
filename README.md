@@ -62,7 +62,7 @@ To get a local copy up and running, follow these simple steps.
 Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/quidax-chart-data.git
+git clone https://github.com/OnuegbuUdochukwu/quidax-chart-data.git
 ```
 
 Navigate to the project directory:
